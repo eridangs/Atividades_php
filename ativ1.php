@@ -9,29 +9,39 @@ require_once('menu_ativ.php');
     <title>Atividade 1</title>
 </head>
 <body>
-    <h1>Calculos Matemáticos Inteiros</h1>
-    <div class="p-5 d-flex align-items-center bg-primary text-white rounded">
-        <form method="POST">
-            <label for="1numero"> Número 1:</label>
-            <input type="number" name="1numero" id="1numero" min="1" max="1000" step="1" placeholder="Insira o primeiro número: ">
-            <label for="2numero"> Número 2:</label>
-            <input type="number" name="2numero" id="2numero" min="1" max="1000" step="1" placeholder="Insira o segundo número: ">
-            <input  type="submit" name="enviar" value="ENVIAR">
+    <header>
+        <form method ="post">
+            <label for="num1">Número 1:</label>
+            <input type="number" id="num1" name="num1" required>
+            <br><br>
+            <label for="num2">Número 2:</label>
+            <input type="number" id="num2" name="num2" required>
+            <br><br>
+            <input type="submit" value="Calcular">
+
         </form>
-    </div>
+    </header>
+
     <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $num1 = (int)$_POST['1numero'];
-        $num2 = (int)$_POST['2numero'];
-    }
-    $adic = $num1 + $num2;
-    $subt = $num1 - $num2;
-    $mult = $num1 * $num2;
-    $divi = $num1/$num2;
-    echo'<br> Adição'.$num1.'+'.$num2.'='.$adic.' Tipo:'.gettype($adic).'<br>'.
-    'Subtração'.$num1.'-'.$num2.'='.$subt.' Tipo:'.gettype($subt).'<br>'.
-    'Multiplicação'.$num1.'x'.$num2.'='.$mult.' Tipo:'.gettype($mult).'<br>'.
-    'Divisão'.$num1.'÷'.$num2.'='.$divi.' Tipo:'.gettype($divi);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $num1 = $_POST['num1'];
+            $num2 = $_POST['num2'];
+            
+            $soma = $num1 + $num2;
+            $subtracao = $num1 - $num2;
+            $multiplicacao = $num1 * $num2;
+            $divisao = ($num2 != 0) ? $num1 / $num2 : "Indefinido";
+
+
+            echo "<h3>Resultados:</h3>";
+            echo "Soma: $soma (Tipo: " . gettype($soma) . ")<br>";
+            echo "Subtração: $subtracao (Tipo: " . gettype($subtracao) . ")<br>";
+            echo "Multiplicação: $multiplicacao (Tipo: " . gettype($multiplicacao) . ")<br>";
+            echo "Divisão: $divisao (Tipo: " . gettype($divisao) . ")<br>";
+            echo "<br>";
+
+        }
     ?>
 </body>
 </html>
